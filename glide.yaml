@@ -1,0 +1,4 @@
+package: ovya/olbase
+import:
+- package: github.com/Sirupsen/logrus
+- package: github.com/facebookgo/stack

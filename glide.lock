@@ -1,0 +1,12 @@
+hash: a42e0a0a17e53103c20a6c58c8bedb897f09c8df2d41bf4c04b20fe11839c76f
+updated: 2017-01-24T11:49:04.334514089+01:00
+imports:
+- name: github.com/facebookgo/stack
+  version: 751773369052141c013c6e827a71e8f35c07879c
+- name: github.com/Sirupsen/logrus
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
+- name: golang.org/x/sys
+  version: 478fcf54317e52ab69f40bb4c7a1520288d7f7ea
+  subpackages:
+  - unix
+testImports: []
