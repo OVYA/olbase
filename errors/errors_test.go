@@ -1,6 +1,3 @@
-// Original source code comse from
-// https://github.com/dropbox/godropbox/tree/master/errors
-// Adapted by the OVYA team
 package errors
 
 import (
