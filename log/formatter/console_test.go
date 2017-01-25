@@ -1,11 +1,10 @@
 package formatter
 
 import (
-	"fmt"
-	"strings"
 	"testing"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestConsoleFormatter(t *testing.T) {
@@ -20,14 +19,6 @@ func TestConsoleFormatter(t *testing.T) {
 	bytes, errChk := formatter.Format(logrus.WithField("test", "test"))
 	str := string(bytes)
 
-	fmt.Println(str)
-
-	if !strings.Contains(str, "test=test") {
-		t.Error(str + " does not contain the string 'test=test'")
-	}
-
-	if errChk != nil {
-		t.Error(errChk)
-	}
-
+	assert.Contains(t, str, "test=test")
+	assert.NoError(t, errChk)
 }

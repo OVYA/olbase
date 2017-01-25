@@ -3,11 +3,13 @@ package log
 import (
 	"ovya/olbase/log/formatter"
 
+	"ovya/olbase/errors"
+
 	"github.com/Sirupsen/logrus"
 )
 
 // Logger is the Ovya logger, wrapping logrus.Logger
-// to ovoid app logrus hard dependency
+// avoiding app logrus hard dependency
 type Logger struct {
 	*logrus.Logger
 }
@@ -25,4 +27,8 @@ func NewConsoleLogger() (log *Logger) {
 	}
 
 	return
+}
+
+func (logger *Logger) Error(err errors.Error) {
+
 }

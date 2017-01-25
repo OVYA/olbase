@@ -8,23 +8,18 @@ import (
 	"syscall"
 	"testing"
 	"unicode"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestStackTrace(t *testing.T) {
 	const testMsg = "test error"
 	er := New(testMsg)
+	assert := assert.New(t)
 
-	if er.GetMessage() != testMsg {
-		t.Errorf("error message %s != expected %s", er.GetMessage(), testMsg)
-	}
-
-	if strings.Contains(er.GetStack(), "ovya/olbase/errors/errors.go") {
-		t.Error("stack trace generation code should not be in the error stack trace")
-	}
-
-	if !strings.Contains(er.GetStack(), "TestStackTrace") {
-		t.Error("stack trace must have test code in it")
-	}
+	assert.Equal(er.GetMessage(), testMsg)
+	assert.NotContains(er.GetStack(), "ovya/olbase/errors/errors.go")
+	assert.Contains(er.GetStack(), "TestStackTrace")
 
 	for i, r := range er.GetStack() {
 		if !(unicode.IsSpace(r) || unicode.IsPrint(r)) {
@@ -40,27 +35,22 @@ func TestWrappedError(t *testing.T) {
 		middleMsg = "I am the middle error"
 		outerMsg  = "I am the mighty outer error"
 	)
+
 	inner := fmt.Errorf(innerMsg)
 	middle := Wrap(inner, middleMsg)
 	outer := Wrap(middle, outerMsg)
 	errorStr := outer.Error()
+	assert := assert.New(t)
 
-	if !strings.Contains(errorStr, innerMsg) {
-		t.Errorf("couldn't find inner error message in:\n%s", errorStr)
-	}
-
-	if !strings.Contains(errorStr, middleMsg) {
-		t.Errorf("couldn't find middle error message in:\n%s", errorStr)
-	}
-
-	if !strings.Contains(errorStr, outerMsg) {
-		t.Errorf("couldn't find outer error message in:\n%s", errorStr)
-	}
+	assert.Contains(errorStr, innerMsg)
+	assert.Contains(errorStr, middleMsg)
+	assert.Contains(errorStr, outerMsg)
 }
 
 func TestStackAddrs(t *testing.T) {
 	pat := regexp.MustCompile("^0x[a-h0-9]+( 0x[a-h0-9]+)*$")
 	er := New("big trouble")
+
 	if !pat.MatchString(er.StackAddrs()) {
 		t.Errorf("StackAddrs didn't match `%s`: %q", pat, er.StackAddrs())
 	}

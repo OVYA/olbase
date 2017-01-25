@@ -1,9 +1,14 @@
 package log
 
-import "testing"
+import (
+	"bytes"
+	"testing"
+)
 
 func TestConsoleLogger(t *testing.T) {
+	var buffer bytes.Buffer
+
 	log := NewConsoleLogger()
+	log.Out = &buffer
 	log.Info("I'll be logged with common and other field")
-	t.Skip("ConsoleLogger.info does not panic")
 }

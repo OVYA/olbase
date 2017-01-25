@@ -2,3 +2,4 @@ package: ovya/olbase
 import:
 - package: github.com/Sirupsen/logrus
 - package: github.com/facebookgo/stack
+- package: github.com/stretchr/testify
