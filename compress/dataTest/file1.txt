@@ -1,0 +1,14 @@
+I am the psychotherapist.  Please, describe your problems.  Each time
+you are finished talking, type RET twice.
+
+hello
+
+How do you do?  What brings you to see me?
+
+I'm a developper
+
+Why do you say you are a developper?
+
+because it's true
+
+Can you elaborate on that?
