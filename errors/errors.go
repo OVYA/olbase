@@ -10,25 +10,25 @@ import (
 
 // Error interface exposes additional information about the error.
 type Error interface {
-	// This returns the error message without the stack trace.
+	// GetMessage returns the error message without the stack trace.
 	GetMessage() string
 
-	// This returns the wrapped error.  This returns nil if this does not wrap
+	// GetInner returns the wrapped error.  This returns nil if this does not wrap
 	// another error.
 	GetInner() error
 
-	// Implements the built-in error interface.
+	// Error implements the built-in error interface.
 	Error() string
 
-	// Returns stack addresses as a string that can be supplied to
+	// StackAddrs returns stack addresses as a string that can be supplied to
 	// a helper tool to get the actual stack trace. This function doesn't result
 	// in resolving full stack frames thus is a lot more efficient.
 	StackAddrs() string
 
-	// Returns stack frames.
+	// StackFrames returns stack frames.
 	StackFrames() []StackFrame
 
-	// Returns string representation of stack frames.
+	// GetStack returns string representation of stack frames.
 	// Stack frame formatting looks generally something like this:
 	// dropbox/rpc.(*clientV4).Do
 	//   /srv/server/go/src/dropbox/rpc/client.go:87 +0xbf9

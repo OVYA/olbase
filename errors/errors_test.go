@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"reflect"
 	"regexp"
-	"strings"
 	"syscall"
 	"testing"
 	"unicode"
@@ -71,6 +70,8 @@ func newDatabaseError(msg string, code int) databaseError {
 }
 
 func TestCustomError(t *testing.T) {
+	assert := assert.New(t)
+
 	dbMsg := "database error 1205 (lock wait time exceeded)"
 	outerMsg := "outer msg"
 
@@ -78,17 +79,10 @@ func TestCustomError(t *testing.T) {
 	outerError := Wrap(dbError.Error, outerMsg)
 
 	errorStr := outerError.Error()
-	if !strings.Contains(errorStr, dbMsg) {
-		t.Errorf("couldn't find database error message in :\n%s", errorStr)
-	}
 
-	if !strings.Contains(errorStr, outerMsg) {
-		t.Errorf("couldn't find outer error message in :\n%s", errorStr)
-	}
-
-	if !strings.Contains(errorStr, "TestCustomError") {
-		t.Errorf("couldn't find this function in stack trace :\n%s", errorStr)
-	}
+	assert.Contains(errorStr, dbMsg)
+	assert.Contains(errorStr, outerMsg)
+	assert.Contains(errorStr, "TestCustomError")
 }
 
 type customErr struct {
@@ -103,43 +97,32 @@ type customNestedErr struct {
 func (cne *customNestedErr) Error() string { return "nested testing error" }
 
 func TestRootError(t *testing.T) {
+	assert := assert.New(t)
 	err := RootError(nil)
-	if err != nil {
-		t.Fatalf("expected nil error")
-	}
+	assert.Nil(err)
+
 	var ce *customErr
 	err = RootError(ce)
-	if err != ce {
-		t.Fatalf("expected err on invalid nil-ptr custom error %T %v", err, err)
-	}
+	assert.Equal(err, ce)
+
 	ce = &customErr{}
 	err = RootError(ce)
-	if err != ce {
-		t.Fatalf("expected err on valid custom error")
-	}
+	assert.Equal(err, ce)
 
 	cne := &customNestedErr{}
 	err = RootError(cne)
-	if err != cne {
-		t.Fatalf("expected err on empty custom error: %T %v", err, err)
-	}
+	assert.Equal(err, cne)
 
 	cne = &customNestedErr{reflect.ValueOf(ce).Pointer()}
 	err = RootError(cne)
-	if err != cne {
-		t.Fatalf("expected err on invalid nested uniptr: %T %v", err, err)
-	}
+	assert.Equal(err, cne)
 
 	cne = &customNestedErr{ce}
 	err = RootError(cne)
-	if err != ce {
-		t.Fatalf("expected ce on valid nested error: %T %v", err, err)
-	}
+	assert.Equal(err, ce)
 
 	err = RootError(syscall.ECONNREFUSED)
-	if err != syscall.ECONNREFUSED {
-		t.Fatalf("expected ECONNREFUSED on valid nested error: %T %v", err, err)
-	}
+	assert.Equal(err, syscall.ECONNREFUSED)
 }
 
 // Benchmarks creation of new errors.

@@ -3,21 +3,12 @@ package log
 import (
 	"ovya/olbase/log/formatter"
 
-	"ovya/olbase/errors"
-
 	"github.com/Sirupsen/logrus"
 )
 
-// Logger is the Ovya logger, wrapping logrus.Logger
-// avoiding app logrus hard dependency
-type Logger struct {
-	*logrus.Logger
-}
-
 // NewConsoleLogger is a constructor for a Logrus text based formatter
-func NewConsoleLogger() (log *Logger) {
-	log = &Logger{}
-	log.Logger = logrus.New()
+func NewConsoleLogger() (log *logrus.Logger) {
+	log = logrus.New()
 
 	log.Formatter = &formatter.ConsoleFormatter{
 		logrus.TextFormatter{
@@ -27,8 +18,4 @@ func NewConsoleLogger() (log *Logger) {
 	}
 
 	return
-}
-
-func (logger *Logger) Error(err errors.Error) {
-
 }
