@@ -17,7 +17,7 @@ func TestStackTrace(t *testing.T) {
 	assert := assert.New(t)
 
 	assert.Equal(er.GetMessage(), testMsg)
-	assert.NotContains(er.GetStack(), "ovya/olbase/errors/errors.go")
+	assert.NotContains(er.GetStack(), "ovya/lib/base/errors/errors.go")
 	assert.Contains(er.GetStack(), "TestStackTrace")
 
 	for i, r := range er.GetStack() {
