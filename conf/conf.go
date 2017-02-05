@@ -3,6 +3,8 @@ package conf
 import (
 	"path"
 
+	"os"
+
 	"github.com/spf13/viper"
 )
 
@@ -14,7 +16,12 @@ func UnmarshalFromAppProperties(appName, appEnv string, i interface{}) (err erro
 	vip := viper.New()
 
 	vip.SetConfigName("conf")
-	vip.AddConfigPath(path.Join("", "etc", appName, appEnv))
+	confFilePath := path.Join(string(os.PathSeparator), "etc", appName, appEnv)
+	vip.AddConfigPath(confFilePath)
+
+	if err = vip.ReadInConfig(); err != nil {
+		return
+	}
 
 	err = vip.Unmarshal(i)
 
