@@ -1,12 +1,14 @@
-hash: 316ef655479181c643eefd6e80ea1b7ad68110a69b17b6c1b4fbbbbe61a06abc
-updated: 2017-01-27T11:41:05.647562366+01:00
+hash: 1d8e2086c0aa743cbd9eea141b673a07c6f589b0564f7ad6dc0ab879d21b8762
+updated: 2017-02-05T17:10:34.651090738+01:00
 imports:
 - name: github.com/facebookgo/stack
   version: 751773369052141c013c6e827a71e8f35c07879c
 - name: github.com/Sirupsen/logrus
   version: d26492970760ca5d33129d2d799e34be5c4782eb
+- name: github.com/spf13/viper
+  version: 651d9d916abc3c3d6a91a12549495caba5edffd2
 - name: github.com/stretchr/testify
-  version: 2402e8e7a02fc811447d11f881aa9746cdc57983
+  version: 4d4bfba8f1d1027c4fdbe371823030df51419987
   subpackages:
   - assert
 - name: golang.org/x/sys
