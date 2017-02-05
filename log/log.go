@@ -6,9 +6,18 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
+// Logger is the Ovya logger.
+// Actuelly this is a wrapper of github.com/Sirupsen/logrus.Logger
+// See https://github.com/sirupsen/logrus for the further documentation
+type Logger struct {
+	logrus.Logger
+}
+
 // NewConsoleLogger is a constructor for a Logrus text based formatter
-func NewConsoleLogger() (log *logrus.Logger) {
-	log = logrus.New()
+func NewConsoleLogger() (log *Logger) {
+	log = &Logger{
+		logrus.Logger{},
+	}
 
 	log.Formatter = &formatter.ConsoleFormatter{
 		logrus.TextFormatter{
