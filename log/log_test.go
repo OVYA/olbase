@@ -2,9 +2,8 @@ package log
 
 import (
 	"bytes"
-	"testing"
-
 	"github.com/Sirupsen/logrus"
+	"testing"
 )
 
 func ExampleNewConsoleLogger() {
@@ -20,6 +19,12 @@ func ExampleNewConsoleLogger() {
 
 func TestConsoleLogger(t *testing.T) {
 	ExampleNewConsoleLogger()
+}
+
+func TestNewDefaultLogger(t *testing.T) {
+
+	logger := NewDefaultLogger()
+	logger.Info("Log Info with default logger")
 }
 
 // func TestErrorLogger(t *testing.T) {
