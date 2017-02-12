@@ -24,9 +24,7 @@ func NewDefaultLogger() *Logger {
 
 // NewConsoleLogger is a constructor for a Logrus text based formatter
 func NewConsoleLogger() (log *Logger) {
-	log = &Logger{
-		logrus.Logger{},
-	}
+	log = &Logger{*logrus.New()}
 
 	log.Formatter = &formatter.ConsoleFormatter{
 		logrus.TextFormatter{

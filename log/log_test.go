@@ -2,11 +2,21 @@ package log
 
 import (
 	"bytes"
-	"github.com/Sirupsen/logrus"
 	"testing"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/stretchr/testify/assert"
 )
 
 func ExampleNewConsoleLogger() {
+	log := NewConsoleLogger()
+
+	log.WithFields(logrus.Fields{
+		"bool_field": true,
+	}).Info("I'll be logged with a bool_field field")
+}
+
+func TestConsoleLogger(t *testing.T) {
 	var buffer bytes.Buffer
 
 	log := NewConsoleLogger()
@@ -15,10 +25,12 @@ func ExampleNewConsoleLogger() {
 	log.WithFields(logrus.Fields{
 		"bool_field": true,
 	}).Info("I'll be logged with a bool_field field")
-}
 
-func TestConsoleLogger(t *testing.T) {
-	ExampleNewConsoleLogger()
+	str := string(buffer.Bytes())
+
+	assert.Contains(t, str, "I'll be logged with a bool_field field")
+	assert.Contains(t, str, "bool_field=true")
+	assert.Contains(t, str, "time=")
 }
 
 func TestNewDefaultLogger(t *testing.T) {
