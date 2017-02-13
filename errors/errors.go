@@ -169,6 +169,17 @@ func Newf(format string, args ...interface{}) Error {
 	return new(nil, fmt.Sprintf(format, args...))
 }
 
+// Conv returns a new baseError initialized with the given error
+// message and the current stack trace.
+// Return nil if err is nil…
+func Conv(err error) Error {
+	if err == nil {
+		return nil
+	}
+
+	return new(nil, err.Error())
+}
+
 // Wrap wraps another error in a new baseError.
 func Wrap(err error, msg string) Error {
 	return new(err, msg)
