@@ -1,2 +1,2 @@
-// Package formatter provides usefull logrus formater
+// Package formatter provides usefull formaters based on logrus
 package formatter

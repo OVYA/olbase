@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/stretchr/testify/assert"
 )
 
 func LogAndAssertJSON(t *testing.T, log func(*logrus.Logger), assertions func(fields logrus.Fields)) {
@@ -13,7 +14,7 @@ func LogAndAssertJSON(t *testing.T, log func(*logrus.Logger), assertions func(fi
 	var fields logrus.Fields
 
 	logger := logrus.New()
-	logger.Hooks.Add(&CallerHook{})
+	logger.Hooks.Add(&CallerHook{Level: 6})
 	logger.Out = &buffer
 	logger.Formatter = new(logrus.JSONFormatter)
 
@@ -32,9 +33,6 @@ func TestCaller(t *testing.T) {
 		logger.Info("Hello World")
 	}, func(fields logrus.Fields) {
 		expected := "caller_test.go:33"
-
-		if fields["caller"] != expected {
-			t.Errorf("Caller was %s, expected %s", fields["caller"], expected)
-		}
+		assert.Contains(t, fields["caller"], expected)
 	})
 }

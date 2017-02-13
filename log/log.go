@@ -13,21 +13,12 @@ type Logger struct {
 	logrus.Logger
 }
 
-// NewDefaultLogger
-func NewDefaultLogger() *Logger {
-
-	logger := &Logger{*logrus.New()}
-	logger.Formatter = new(formatter.DefaultFormatter)
-
-	return logger
-}
-
-// NewConsoleLogger is a constructor for a Logrus text based formatter
-func NewConsoleLogger() (log *Logger) {
+// NewTextLogger is a constructor for a Logrus text based formatter
+func NewTextLogger() (log *Logger) {
 	log = &Logger{*logrus.New()}
 
-	log.Formatter = &formatter.ConsoleFormatter{
-		logrus.TextFormatter{
+	log.Formatter = &formatter.TextFormatter{
+		TextFormatter: logrus.TextFormatter{
 			TimestampFormat: "2006-01-02 15:04:05",
 			FullTimestamp:   true,
 		},
