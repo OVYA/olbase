@@ -1,4 +1,4 @@
-module ovya.fr/olbase
+module ovya.fr/olbase.git
 
 go 1.20
 
