@@ -1,6 +1,0 @@
-package: ovya/lib/olbase
-import:
-- package: github.com/Sirupsen/logrus
-- package: github.com/facebookgo/stack
-- package: github.com/stretchr/testify
-- package: github.com/spf13/viper
