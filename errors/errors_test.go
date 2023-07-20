@@ -17,7 +17,7 @@ func TestStackTrace(t *testing.T) {
 	assert := assert.New(t)
 
 	assert.Equal(er.GetMessage(), testMsg)
-	assert.NotContains(er.GetStack(), "ovya.fr/lib/olbase/errors/errors.go")
+	assert.NotContains(er.GetStack(), "ovya.fr/olbase/errors/errors.go")
 	assert.Contains(er.GetStack(), "TestStackTrace")
 
 	for i, r := range er.GetStack() {
@@ -57,7 +57,6 @@ func TestStackAddrs(t *testing.T) {
 
 // ---------------------------------------
 // minimal example + test for custom error
-//
 type databaseError struct {
 	Error
 	code int
