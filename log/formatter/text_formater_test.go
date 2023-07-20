@@ -22,5 +22,5 @@ func TestTextFormatter(t *testing.T) {
 
 	str := string(bytes)
 	assert.Contains(t, str, "test_field=test")
-	assert.Contains(t, str, `caller="ovya/lib/olbase/log/formatter/text_formater_test.go:20 (TestTextFormatter)"`)
+	assert.Contains(t, str, `caller="ovya.fr/lib/olbase/log/formatter/text_formater_test.go:20 (TestTextFormatter)"`)
 }

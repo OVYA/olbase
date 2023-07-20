@@ -1,2 +1,2 @@
-// Package olbase is Ovya Lib Basis
+// Package olbase is the Golang Ovya Lib Basis
 package olbase
