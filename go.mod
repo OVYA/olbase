@@ -27,3 +27,5 @@ require (
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.0.0-20160928153709-a5b47d31c556 // indirect
 )
+
+replace ovya.fr/olbase.git v0.0.0-unpublished => github.com/OVYA/olbase@latest
