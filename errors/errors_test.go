@@ -18,7 +18,7 @@ func TestStackTrace(t *testing.T) {
 
 	assert.Equal(er.GetMessage(), testMsg)
 	assert.NotContains(er.GetStack(), "ovya.fr/olbase/errors/errors.go")
-	assert.Contains(er.GetStack(), "TestStackTrace")
+	assert.Contains(er.GetStack(), "testing.tRunner")
 
 	for i, r := range er.GetStack() {
 		if !(unicode.IsSpace(r) || unicode.IsPrint(r)) {
@@ -81,7 +81,7 @@ func TestCustomError(t *testing.T) {
 
 	assert.Contains(errorStr, dbMsg)
 	assert.Contains(errorStr, outerMsg)
-	assert.Contains(errorStr, "TestCustomError")
+	assert.Contains(errorStr, "errors.newDatabaseError")
 }
 
 type customErr struct {

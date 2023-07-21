@@ -1,4 +1,4 @@
-module ovya.fr/olbase.git
+module ovya.fr/olbase
 
 go 1.20
 
@@ -28,4 +28,5 @@ require (
 	gopkg.in/yaml.v2 v2.0.0-20160928153709-a5b47d31c556 // indirect
 )
 
-replace ovya.fr/olbase.git v0.0.0-unpublished => github.com/OVYA/olbase@latest
+
+replace . => github.com/OVYA/olbase v0.0.0-20230721085815-83fc11bfde8c
