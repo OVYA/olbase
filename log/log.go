@@ -1,7 +1,7 @@
 package log
 
 import (
-	"ovya.fr/olbase.git/log/formatter"
+	"ovya.fr/olbase/log/formatter"
 
 	"github.com/Sirupsen/logrus"
 )

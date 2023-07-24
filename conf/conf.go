@@ -5,7 +5,7 @@ import (
 
 	"os"
 
-	oerr "ovya.fr/olbase.git/errors"
+	oerr "ovya.fr/olbase/errors"
 
 	"github.com/spf13/viper"
 )
